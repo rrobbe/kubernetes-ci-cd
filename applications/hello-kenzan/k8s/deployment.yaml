@@ -35,3 +35,20 @@ spec:
         ports:
         - containerPort: 80
           name: hello-kenzan
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-kenzan
+  labels:
+    app: hello-kenzan-k8s
+  annotations:
+spec:
+  rules:
+  - host: hello-kenzan.mldigital.be
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: hello-kenzan
+            servicePort: 80

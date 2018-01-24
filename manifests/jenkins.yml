@@ -74,3 +74,20 @@ spec:
       - name: jenkins-persistent-storage
         persistentVolumeClaim:
           claimName: jenkins-claim
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins-k8s
+  annotations:
+spec:
+  rules:
+  - host: jenkins.mldigital.be
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: jenkins
+            servicePort: 80
